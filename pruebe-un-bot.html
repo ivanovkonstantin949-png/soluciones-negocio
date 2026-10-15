@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pruebe un bot de WhatsApp en 30 segundos | Demo</title>
+<meta name="description" content="Demo de un bot de WhatsApp para negocios: catálogo con precios, horarios, citas y paso a una persona. Pruébelo como si fuera su cliente.">
+<meta name="theme-color" content="#0f766e">
+<link rel="canonical" href="https://ivanovkonstantin949-png.github.io/soluciones-negocio/pruebe-un-bot.html">
+<link rel="alternate" hreflang="es" href="https://ivanovkonstantin949-png.github.io/soluciones-negocio/pruebe-un-bot.html">
+<link rel="alternate" hreflang="pt-BR" href="https://ivanovkonstantin949-png.github.io/soluciones-negocio/pt/teste-um-bot.html">
+<link rel="stylesheet" href="style.css">
+<style>
+.demo-top {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  background: var(--card);
+}
+.demo-top a {
+  font-weight: 700;
+  text-decoration: none;
+}
+.demo-hero {
+  padding: 28px 0 8px;
+}
+.demo-hero h1 {
+  font-size: clamp(1.7rem, 5.6vw, 2.6rem);
+}
+.demo-hero p {
+  color: var(--ink-soft);
+  max-width: 640px;
+}
+.demo-grid {
+  display: grid;
+  gap: 24px;
+  align-items: start;
+  padding-top: 8px;
+  padding-bottom: 40px;
+}
+@media (min-width: 900px) {
+  .demo-grid {
+    grid-template-columns: 400px 1fr;
+    gap: 40px;
+  }
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0 0 14px;
+}
+.tab {
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.tab[aria-selected="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.phone {
+  width: 100%;
+  max-width: 400px;
+  border: 10px solid #1d2529;
+  border-radius: 34px;
+  overflow: hidden;
+  background: #efeae2;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  height: min(640px, 78vh);
+  min-height: 480px;
+}
+.phone__bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--accent-dark);
+  color: #fff;
+}
+.phone__ava {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  flex: none;
+}
+.phone__who {
+  flex: 1;
+  min-width: 0;
+  line-height: 1.2;
+}
+.phone__who b {
+  display: block;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.phone__who small {
+  opacity: 0.8;
+  font-size: 0.78rem;
+}
+.phone__restart {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.75rem;
+  padding: 6px 10px;
+  min-height: 32px;
+  cursor: pointer;
+}
+.log {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 10px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  scroll-behavior: smooth;
+}
+.msg {
+  max-width: 85%;
+  padding: 7px 10px 6px;
+  border-radius: 10px;
+  font-size: 0.93rem;
+  line-height: 1.4;
+  white-space: pre-line;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+  overflow-wrap: anywhere;
+}
+.msg--bot {
+  align-self: flex-start;
+  background: #fff;
+  border-top-left-radius: 2px;
+}
+.msg--me {
+  align-self: flex-end;
+  background: #d9f5e8;
+  border-top-right-radius: 2px;
+}
+.msg time {
+  display: block;
+  text-align: right;
+  font-size: 0.68rem;
+  color: #6b7b80;
+  margin-top: 2px;
+}
+.typing {
+  align-self: flex-start;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  gap: 4px;
+}
+.typing i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #9aa8ac;
+  animation: blink 1s infinite;
+}
+.typing i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.typing i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes blink {
+  0%,
+  80%,
+  100% {
+    opacity: 0.3;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .typing i {
+    animation: none;
+  }
+  .log {
+    scroll-behavior: auto;
+  }
+}
+.opts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 4px 10px 8px;
+  justify-content: flex-end;
+}
+.opt {
+  min-height: 40px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: #fff;
+  color: var(--accent-dark);
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.opt:hover,
+.opt:focus-visible {
+  background: var(--accent-soft);
+}
+.compose {
+  display: flex;
+  gap: 6px;
+  padding: 8px;
+  background: #f4f1ec;
+  border-top: 1px solid #e2ddd5;
+}
+.compose input {
+  flex: 1;
+  min-width: 0;
+  min-height: 42px;
+  border: 1px solid #d9d4cc;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 16px;
+  background: #fff;
+}
+.compose button {
+  min-width: 44px;
+  min-height: 42px;
+  border-radius: 999px;
+  border: 0;
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0 14px;
+  cursor: pointer;
+}
+
+.demo-note {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 12px 0 0;
+  max-width: 400px;
+}
+.demo-cta {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+.demo-cta .btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 14px 0 10px;
+}
+.demo-cta .tiers {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  margin: 14px 0 0;
+}
+.demo-cta small {
+  color: var(--ink-soft);
+}
+
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="./">GRUSTINA AI</a>
+    <div class="nav__links">
+      <a href="./#servicios">Servicios</a>
+      <a href="pt/teste-um-bot.html">Português</a>
+      <a class="btn btn--small" href="./#contacto">Escribir</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+<section class="demo-hero">
+  <div class="wrap">
+    <h1>Pruebe un bot de WhatsApp en 30 segundos</h1>
+    <p>Elija un negocio y toque las opciones como si fuera su cliente. Así respondería su WhatsApp, a cualquier hora.</p>
+  </div>
+</section>
+
+<section class="wrap demo-grid">
+  <div>
+    <div id="demo-app" hidden>
+      <div class="tabs" id="tabs" role="tablist" aria-label="Tipo de negocio"></div>
+      <div class="phone">
+        <div class="phone__bar">
+          <span class="phone__ava" id="ava" aria-hidden="true"></span>
+          <span class="phone__who"><b id="who"></b><small>en línea</small></span>
+          <button class="phone__restart" id="restart" type="button">Empezar de nuevo</button>
+        </div>
+        <div class="log" id="log" aria-live="polite"></div>
+        <div class="opts" id="opts"></div>
+        <form class="compose" id="compose" autocomplete="off">
+          <input id="msg" type="text" placeholder="Escriba un mensaje" aria-label="Escriba un mensaje" maxlength="120">
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+    <p class="demo-note">Demostración con respuestas programadas y datos de ejemplo. Su bot usa sus precios, horarios y catálogo.</p>
+  </div>
+  <aside class="demo-cta">
+    <h2>¿Quiere uno así para su negocio?</h2>
+    <p>Cuénteme qué vende y qué le preguntan sus clientes. Le respondo con precio y plazo por escrito.</p>
+    <div class="btns">
+      <a class="btn" href="#contacto">Quiero uno así</a>
+      <a class="btn btn--ghost" href="https://www.workana.com/freelancer/mikhail-ivanov-4" target="_blank" rel="noopener">Contratar por Workana</a>
+    </div>
+    <small>El pago queda retenido en Workana hasta que usted aprueba el trabajo.</small>
+    <p class="tiers">Catálogo, horarios y respuestas: bot básico. Agendar citas y consultar pedidos: asistente con IA.</p>
+    <h3 class="precios-h">Precios</h3>
+    <p class="precio">Bot básico (catálogo, horarios y respuestas): desde USD 35 y listo en 1 a 2 días en México, Colombia y Chile (en Chile unos 34.300 CLP); desde USD 80 en Perú y USD 60 en Argentina.</p>
+    <p class="precio">Asistente con IA (responde preguntas libres, agenda citas y consulta pedidos): desde USD 120 en México y Colombia, más un pago mensual por el servicio; en Chile desde USD 120 (unos 118.000 CLP), listo en 5 a 10 días; en Perú y Argentina desde USD 150.</p>
+  </aside>
+</section>
+
+<section id="contacto" class="sec sec--alt">
+  <div class="wrap contact">
+    <div class="contact__form card">
+      <h2>Cuénteme qué necesita</h2>
+      <form id="pedido" autocomplete="on">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" name="nombre" type="text" required autocomplete="name">
+        <label for="necesita">¿Qué necesita?</label>
+        <textarea id="necesita" name="necesita" rows="4" required></textarea>
+        <label for="correo">Su correo</label>
+        <input id="correo" name="correo" type="email" required autocomplete="email">
+        <button class="btn btn--wide" type="submit" id="enviar">Enviar</button>
+        <p class="form__hint">Le respondo en menos de 15 minutos, de 8 a 22 h de su país.</p>
+        <p id="form-ok" class="form__ok" hidden>Recibido. Le respondo en menos de 15 minutos, de 8 a 22 h de su país.</p>
+      </form>
+    </div>
+    <aside class="contact__side card">
+      <h3>¿Prefiere escribir directo?</h3>
+      <p class="email"><a href="mailto:ivanovkonstantin949@gmail.com?subject=%5BES%20web%5D%20demo%20">ivanovkonstantin949@gmail.com</a></p>
+      <p class="muted">Respondo en español. Precio y alcance por escrito; su pago queda protegido en Workana hasta que aprueba el trabajo.</p>
+    </aside>
+  </div>
+</section>
+</main>
+
+<footer class="foot"><div class="wrap"><p>Mikhail Ivanov · estudio GRUSTINA AI</p></div></footer>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  ['gclid', 'utm_campaign', 'utm_content'].forEach(function (k) {
+    var v = q.get(k); if (v) { try { sessionStorage.setItem('ad_' + k, v); } catch (e) {} }
+  });
+  window.adParam = function (k) { try { return sessionStorage.getItem('ad_' + k) || ''; } catch (e) { return ''; } };
+  window.adTid = function (s) { var h = 5381; for (var i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) >>> 0; } return 'f' + h.toString(16); };
+})();
+</script>
+<script type="application/json" id="demo-data">{"default_cc": "MX", "page": {"fallback": "No entendí. Elija una opción:", "pedir": "Quiero un bot como el de la demo ({tab}). Mi negocio: ", "need_id": "necesita"}, "nichos": [{"id": "panaderia", "tab": "Panadería", "name": "Panadería de ejemplo", "greet": ["¡Hola! Gracias por escribir a la panadería. ¿En qué le ayudo?"], "nodes": {"menu": {"bot": [], "opts": [["Ver catálogo con precios", "catalogo"], ["Horario y dirección", "horario"], ["¿Tienen para mañana?", "encargo"], ["Hablar con una persona", "persona"]]}, "catalogo": {"bot": ["Este es nuestro catálogo de hoy:\n🎂 {Torta} de chocolate: {p:22}\n🎂 {Torta} tres leches: {p:20}\n🍰 Cheesecake de fresa: {p:24}\n🥐 Docena de pan dulce: {p:6}", "¿Quiere saber algo más?"], "opts": [["¿Tienen para mañana?", "encargo"], ["Horario y dirección", "horario"], ["Menú", "menu"]]}, "horario": {"bot": ["Abrimos de lunes a sábado de 8 a 20 h y domingo de 9 a 14 h.", "📍 Dirección de ejemplo: Av. Central 123. ¿Le ayudo con algo más?"], "opts": [["Ver catálogo con precios", "catalogo"], ["Menú", "menu"]]}, "encargo": {"bot": ["Sí, tomamos encargos hasta las 18 h del día anterior.", "¿Le paso con una persona del equipo para confirmar el suyo?"], "opts": [["Sí, con una persona", "persona"], ["Ver catálogo con precios", "catalogo"], ["Menú", "menu"]]}, "persona": {"bot": ["Listo, le paso con una persona del equipo. Le responde aquí mismo en horario de atención. 🙌"], "opts": [["Menú", "menu"]]}}, "keys": {"hora": "horario", "abren": "horario", "direcci": "horario", "ubicaci": "horario", "precio": "catalogo", "cuesta": "catalogo", "catálogo": "catalogo", "catalogo": "catalogo", "pastel": "catalogo", "torta": "catalogo", "mañana": "encargo", "encargo": "encargo", "pedido": "encargo", "persona": "persona", "humano": "persona", "asesor": "persona"}}, {"id": "clinica", "tab": "Clínica dental", "name": "Clínica dental de ejemplo", "greet": ["¡Hola! Gracias por escribir a la clínica. ¿En qué le ayudo?"], "nodes": {"menu": {"bot": [], "opts": [["Agendar una cita", "cita"], ["Servicios y precios", "precios"], ["Horario y dirección", "horario"], ["Hablar con una persona", "persona"]]}, "precios": {"bot": ["Estos son algunos precios:\n🦷 Consulta de valoración: {p:15}\n🦷 Limpieza dental: {p:30}\n✨ Blanqueamiento: {p:120}", "¿Quiere agendar una cita?"], "opts": [["Agendar una cita", "cita"], ["Menú", "menu"]]}, "cita": {"bot": ["Con gusto. ¿Qué día le queda mejor?"], "opts": [["Mañana", "hora", {"dia": "mañana"}], ["Pasado mañana", "hora", {"dia": "pasado mañana"}], ["Menú", "menu"]]}, "hora": {"bot": ["Para {dia} tengo estos horarios libres:"], "opts": [["9:30", "confirmar", {"hora": "9:30"}], ["12:00", "confirmar", {"hora": "12:00"}], ["17:30", "confirmar", {"hora": "17:30"}]]}, "confirmar": {"bot": ["Listo ✅ Su cita queda para {dia} a las {hora}.", "Le mando un recordatorio aquí un día antes. Si necesita cambiarla, escríbame."], "opts": [["Servicios y precios", "precios"], ["Menú", "menu"]]}, "horario": {"bot": ["Atendemos de lunes a viernes de 9 a 19 h y sábado de 9 a 14 h.", "📍 Dirección de ejemplo: Calle 10 n.º 45. ¿Le agendo una cita?"], "opts": [["Agendar una cita", "cita"], ["Menú", "menu"]]}, "persona": {"bot": ["Listo, le paso con la recepción. Le responden aquí mismo en horario de atención. 🙌"], "opts": [["Menú", "menu"]]}}, "keys": {"cita": "cita", "turno": "cita", "agendar": "cita", "reservar": "cita", "precio": "precios", "cuesta": "precios", "limpieza": "precios", "blanqueamiento": "precios", "hora": "horario", "abren": "horario", "direcci": "horario", "ubicaci": "horario", "persona": "persona", "humano": "persona", "recepci": "persona"}}, {"id": "tienda", "tab": "Tienda de ropa", "name": "Tienda de ropa de ejemplo", "greet": ["¡Hola! Gracias por escribir a la tienda. ¿En qué le ayudo?"], "nodes": {"menu": {"bot": [], "opts": [["Ver catálogo", "catalogo"], ["Tallas y envíos", "envios"], ["¿Dónde está mi pedido?", "pedido"], ["Hablar con una persona", "persona"]]}, "catalogo": {"bot": ["Lo más pedido esta semana:\n👖 Jean clásico: {p:25}\n👚 Blusa de lino: {p:15}\n👗 Vestido midi: {p:30}", "Tenemos tallas S a XL. ¿Quiere ver tallas y envíos?"], "opts": [["Tallas y envíos", "envios"], ["Menú", "menu"]]}, "envios": {"bot": ["Tallas S, M, L y XL. Si duda, le paso la guía de medidas.", "Enviamos a todo el país en 2 a 4 días hábiles. ¿Le ayudo con algo más?"], "opts": [["Ver catálogo", "catalogo"], ["Menú", "menu"]]}, "pedido": {"bot": ["Escríbame su número de pedido y lo reviso."], "opts": [["Pedido 1042", "pedido_ok", {"num": "1042"}], ["Menú", "menu"]]}, "pedido_ok": {"bot": ["Pedido {num}: salió hoy de la tienda 🚚", "Llega en 2 días hábiles. Le aviso aquí cuando esté en reparto."], "opts": [["Ver catálogo", "catalogo"], ["Menú", "menu"]]}, "persona": {"bot": ["Listo, le paso con una persona del equipo. Le responde aquí mismo en horario de atención. 🙌"], "opts": [["Menú", "menu"]]}}, "keys": {"precio": "catalogo", "cuesta": "catalogo", "catálogo": "catalogo", "catalogo": "catalogo", "talla": "envios", "envío": "envios", "envio": "envios", "pedido": "pedido", "llega": "pedido", "persona": "persona", "humano": "persona", "asesor": "persona"}}]}</script>
+<script>
+(function () {
+  "use strict";
+  var D = JSON.parse(document.getElementById("demo-data").textContent);
+  var P = D.page;
+
+  var CUR = {
+    MX: { r: 18, step: 10, pre: "$", sep: ",", post: " MXN" },
+    CO: { r: 3800, step: 1000, pre: "$", sep: ".", post: " COP" },
+    CL: { r: 950, step: 1000, pre: "$", sep: ".", post: " CLP" },
+    PE: { r: 3.6, step: 5, pre: "S/ ", sep: "," },
+    AR: { r: 1300, step: 1000, pre: "$", sep: ".", post: " ARS" },
+    BR: { r: 2.5, step: 5, pre: "R$ ", sep: "." },
+    EC: { r: 1, step: 1, pre: "$", sep: ",", post: " USD" },
+    SV: { r: 1, step: 1, pre: "$", sep: ",", post: " USD" },
+    PA: { r: 1, step: 1, pre: "$", sep: ",", post: " USD" },
+  };
+  function pais() {
+    var q = new URLSearchParams(location.search);
+    var c = (q.get("pais") || q.get("utm_campaign") || "").trim().toUpperCase();
+    if (!c) {
+      try {
+        c = (sessionStorage.getItem("ad_utm_campaign") || "")
+          .trim()
+          .toUpperCase();
+      } catch (e) {}
+    }
+    return c.length === 2 ? c : D.default_cc;
+  }
+  var CC = pais();
+  function precio(usd) {
+    var c = CUR[CC];
+    if (!c) return "USD " + usd;
+    var n = Math.max(c.step, Math.round((usd * c.r) / c.step) * c.step);
+    var s = String(n).replace(/\B(?=(\d{3})+(?!\d))/g, c.sep);
+    return c.pre + s + (c.post || "");
+  }
+  function fill(t, vars) {
+    return t
+      .replace(/\{p:(\d+(?:\.\d+)?)\}/g, function (_, n) {
+        return precio(parseFloat(n));
+      })
+      .replace(/\{torta\}/g, CC === "MX" ? "pastel" : "torta")
+      .replace(/\{Torta\}/g, CC === "MX" ? "Pastel" : "Torta")
+      .replace(/\{(\w+)\}/g, function (m, k) {
+        return vars[k] != null ? vars[k] : m;
+      });
+  }
+
+  var tabs = document.getElementById("tabs");
+  var log = document.getElementById("log");
+  var opts = document.getElementById("opts");
+  var form = document.getElementById("compose");
+  var input = document.getElementById("msg");
+  var who = document.getElementById("who");
+  var ava = document.getElementById("ava");
+  var nicho = null;
+  var vars = {};
+  var busy = 0;
+  var run = 0;
+
+  function hora() {
+    var d = new Date();
+    return d.getHours() + ":" + String(d.getMinutes()).padStart(2, "0");
+  }
+  function scroll() {
+    log.scrollTop = log.scrollHeight;
+  }
+  function bubble(text, me) {
+    var m = document.createElement("div");
+    m.className = "msg " + (me ? "msg--me" : "msg--bot");
+    m.textContent = text;
+    var t = document.createElement("time");
+    t.textContent = hora();
+    m.appendChild(t);
+    log.appendChild(m);
+    scroll();
+  }
+  function setOpts(list) {
+    opts.innerHTML = "";
+    (list || []).forEach(function (o) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "opt";
+      b.textContent = o[0];
+      b.addEventListener("click", function () {
+        if (busy) return;
+        bubble(o[0], true);
+        go(o[1], o[2]);
+      });
+      opts.appendChild(b);
+    });
+  }
+  function say(lines, then) {
+    var my = run;
+    busy++;
+    setOpts([]);
+    var i = 0;
+    (function next() {
+      if (my !== run) return;
+      if (i >= lines.length) {
+        busy--;
+        then();
+        return;
+      }
+      var ty = document.createElement("div");
+      ty.className = "typing";
+      ty.setAttribute("aria-hidden", "true");
+      ty.innerHTML = "<i></i><i></i><i></i>";
+      log.appendChild(ty);
+      scroll();
+      var line = fill(lines[i++], vars);
+      setTimeout(
+        function () {
+          if (my !== run) return;
+          ty.remove();
+          bubble(line, false);
+          setTimeout(next, 250);
+        },
+        Math.min(1300, 450 + line.length * 6),
+      );
+    })();
+  }
+  function go(id, set) {
+    if (set)
+      Object.keys(set).forEach(function (k) {
+        vars[k] = set[k];
+      });
+    var n = nicho.nodes[id] || nicho.nodes.menu;
+    say(n.bot, function () {
+      setOpts(n.opts);
+    });
+  }
+  function start(nx) {
+    run++;
+    busy = 0;
+    nicho = nx;
+    vars = {};
+    log.innerHTML = "";
+    who.textContent = nx.name;
+    ava.textContent = nx.tab.charAt(0);
+    [].forEach.call(tabs.children, function (b) {
+      b.setAttribute(
+        "aria-selected",
+        b.dataset.id === nx.id ? "true" : "false",
+      );
+    });
+    say(nx.greet, function () {
+      setOpts(nx.nodes.menu.opts);
+    });
+  }
+  function entender(txt) {
+    var t = txt.toLowerCase();
+    var m = /\b\d{3,6}\b/.exec(t);
+    if (m && nicho.nodes.pedido_ok) return ["pedido_ok", { num: m[0] }];
+    var keys = Object.keys(nicho.keys);
+    for (var i = 0; i < keys.length; i++) {
+      if (t.indexOf(keys[i]) >= 0) return [nicho.keys[keys[i]], null];
+    }
+    return null;
+  }
+
+  D.nichos.forEach(function (nx) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "tab";
+    b.setAttribute("role", "tab");
+    b.dataset.id = nx.id;
+    b.textContent = nx.tab;
+    b.addEventListener("click", function () {
+      start(nx);
+    });
+    tabs.appendChild(b);
+  });
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var v = input.value.trim();
+    if (!v || busy) return;
+    input.value = "";
+    bubble(v, true);
+    var r = entender(v);
+    if (r) {
+      go(r[0], r[1]);
+    } else {
+      say([P.fallback], function () {
+        setOpts(nicho.nodes.menu.opts);
+      });
+    }
+  });
+  document.getElementById("restart").addEventListener("click", function () {
+    start(nicho);
+  });
+  document.getElementById("demo-app").hidden = false;
+  var ini = new URLSearchParams(location.search).get("nicho");
+  start(
+    D.nichos.filter(function (n) {
+      return n.id === ini;
+    })[0] || D.nichos[0]
+  );
+  var cta = document.querySelector(".demo-cta .btn");
+  if (cta && P.pedir) {
+    cta.addEventListener("click", function () {
+      var t = document.getElementById(P.need_id);
+      if (t && !t.value.trim()) t.value = P.pedir.replace("{tab}", nicho.tab);
+    });
+  }
+  window.__demo = {
+    cc: CC,
+    precio: precio,
+    busy: function () {
+      return busy;
+    },
+  };
+})();
+
+</script>
+<script>
+(function () {
+  var f = document.getElementById('pedido');
+  var cc = (window.__demo && window.__demo.cc) || (function () { var u = (window.adParam ? adParam('utm_campaign') : '').trim().toUpperCase(); return u.length === 2 && '|MX|CO|CL|AR|PE|EC|UY|VE|BO|PY|CR|PA|DO|GT|SV|HN|NI|BR|'.indexOf('|' + u + '|') >= 0 ? u : 'MX'; })();
+  function v(id) { return document.getElementById(id).value.trim(); }
+  window.esMailto = function () {
+    var nec = v('necesita');
+    var subject = '[ES web] ' + cc + ' demo ' + nec.replace(/\s+/g, ' ').slice(0, 40);
+    var body = 'Nombre: ' + v('nombre') + '\nPaís: ' + cc + '\nPágina: ' + location.pathname + '\nNecesito: ' + nec + '\nMi correo: ' + v('correo');
+    return 'mailto:ivanovkonstantin949@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  };
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var b = document.getElementById('enviar'); b.disabled = true; b.textContent = '…';
+    var data = {_subject: '[ES web] ' + cc + ' demo ' + v('necesita').replace(/\s+/g, ' ').slice(0, 40), _template: 'table', _captcha: 'false',
+                nombre: v('nombre'), necesito: v('necesita'), correo: v('correo'), pais: cc, pagina: location.pathname, _replyto: v('correo'), anuncio: (window.adParam && adParam('utm_campaign')) ? adParam('utm_campaign') + '/' + adParam('utm_content') : '', gclid: window.adParam ? adParam('gclid') : '',};
+    fetch('https://formsubmit.co/ajax/ivanovkonstantin949@gmail.com', {method: 'POST', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}, body: JSON.stringify(data)})
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (String(j.success) === 'true') { document.getElementById('form-ok').hidden = false; f.reset(); b.textContent = 'OK ✓'; } else { window.location.href = window.esMailto(); } })
+      .catch(function () { window.location.href = window.esMailto(); });
+  });
+})();
+</script>
+</body>
+</html>
