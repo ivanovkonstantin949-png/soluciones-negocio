@@ -36,6 +36,10 @@
   align-items: start;
   padding-top: 8px;
   padding-bottom: 40px;
+  grid-template-columns: minmax(0, 1fr);
+}
+.demo-grid > * {
+  min-width: 0;
 }
 @media (min-width: 900px) {
   .demo-grid {
@@ -117,6 +121,11 @@
   font-size: 0.78rem;
 }
 .phone__restart {
+  flex: none;
+  max-width: 45%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.5);
   color: #fff;
