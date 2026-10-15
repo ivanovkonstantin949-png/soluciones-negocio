@@ -17,7 +17,7 @@
     <div class="nav__links">
       <a href="./#servicos">Serviços</a>
       <a href="../">Español</a>
-      <a class="btn btn--small" href="#contato">Escrever</a>
+      <a class="btn btn--small" href="#contato">Contato</a>
     </div>
   </div>
 </nav>
@@ -27,7 +27,7 @@
     <div class="hero__text">
       <h1>Quanto custa um chatbot para WhatsApp em 2026</h1>
       <p class="hero__intro">Um chatbot de WhatsApp com menu (horários, preços, pedidos) custa a partir de R$ 300. Se você quer um atendente com IA, que responde perguntas livres com base nas informações do seu negócio, o valor começa em R$ 900.</p>
-      <p class="hero__note">A partir de <b>R$ 300</b> · preço de lançamento para os primeiros clientes</p>
+      <p class="hero__note">A partir de <b>R$ 300</b> · preço de lançamento para os primeiros 10 clientes, em troca de uma avaliação sincera</p>
       <div class="hero__cta"><a class="btn" href="#contato">Pedir preço exato</a></div>
     </div>
   </div>
@@ -48,7 +48,7 @@
 <section class="sec sec--alt">
   <div class="wrap">
     <h2>Um caso real</h2>
-    <article class="card case" data-id="autoservice-ai-assistant"><span class="tag">Oficina mecânica</span><h3>Bot de relatórios diários para o dono da oficina</h3><ul class="facts"><li>Toda noite o dono recebe o resumo do dia no celular.</li><li>A primeira etapa foi entregue em 7 dias e paga.</li><li>O cliente continuou comigo e pagou as etapas seguintes.</li></ul></article>
+    <article class="card case" data-id="autoservice-ai-assistant"><span class="tag">Oficina mecânica</span><h3>Bot de relatórios diários para o dono da oficina</h3><ul class="facts"><li>Toda noite o dono recebe o resumo do dia no celular.</li><li>A primeira etapa ficou pronta em 7 dias.</li><li>O cliente continuou com as etapas seguintes.</li></ul></article>
   </div>
 </section>
 
@@ -71,8 +71,9 @@
         <textarea id="precisa" name="precisa" rows="4" required></textarea>
         <label for="email">Seu e-mail</label>
         <input id="email" name="email" type="email" required autocomplete="email">
-        <button class="btn btn--wide" type="submit">Enviar por e-mail</button>
-        <p class="form__hint">Vai abrir o seu aplicativo de e-mail com a mensagem pronta. É só tocar em «Enviar».</p>
+        <button class="btn btn--wide" type="submit" id="enviar">Enviar</button>
+        <p class="form__hint">Respondo em poucos minutos no seu e-mail.</p>
+        <p id="form-ok" class="form__ok" hidden>Recebido. Respondo em poucos minutos no seu e-mail.</p>
       </form>
     </div>
     <aside class="contact__side card">
@@ -95,7 +96,16 @@
     var body = 'Nome: ' + v('nome') + '\nPaís: Brasil (BR)\nPágina: ' + location.pathname + '\nPreciso: ' + nec + '\nMeu e-mail: ' + v('email');
     return 'mailto:ivanovkonstantin949@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
   };
-  f.addEventListener('submit', function (e) { e.preventDefault(); window.location.href = window.esMailto(); });
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var b = document.getElementById('enviar'); b.disabled = true; b.textContent = 'Enviando…';
+    var data = {_subject: '[ES web] BR ' + v('precisa').replace(/\s+/g, ' ').slice(0, 40), _template: 'table', _captcha: 'false',
+                nome: v('nome'), preciso: v('precisa'), email: v('email'), pagina: location.pathname, _replyto: v('email')};
+    fetch('https://formsubmit.co/ajax/ivanovkonstantin949@gmail.com', {method: 'POST', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}, body: JSON.stringify(data)})
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (String(j.success) === 'true') { document.getElementById('form-ok').hidden = false; f.reset(); b.textContent = 'Enviado ✓'; } else { window.location.href = window.esMailto(); } })
+      .catch(function () { window.location.href = window.esMailto(); });
+  });
 })();
 </script>
 </body>

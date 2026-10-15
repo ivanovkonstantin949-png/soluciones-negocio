@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#0f766e">
 <link rel="canonical" href="https://ivanovkonstantin949-png.github.io/soluciones-negocio/cuanto-cuesta-pagina-web-argentina.html">
 <link rel="stylesheet" href="style.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Me sirve Tiendanube o conviene una página aparte?", "acceptedAnswer": {"@type": "Answer", "text": "Si vende productos, Tiendanube suele ser lo más práctico. Si ofrece servicios, una página con botón de WhatsApp alcanza. Cuénteme qué vende y le digo qué conviene."}}, {"@type": "Question", "name": "¿El precio cambia si se demora el proyecto?", "acceptedAnswer": {"@type": "Answer", "text": "No. El precio acordado en dólares no cambia."}}, {"@type": "Question", "name": "¿Cómo se paga?", "acceptedAnswer": {"@type": "Answer", "text": "Acordamos el alcance por escrito, usted paga y empiezo."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Me sirve Tiendanube o conviene una página aparte?", "acceptedAnswer": {"@type": "Answer", "text": "Si vende productos, Tiendanube suele ser lo más práctico. Si ofrece servicios, una página con botón de WhatsApp alcanza. Cuénteme qué vende y le digo qué conviene."}}, {"@type": "Question", "name": "¿El precio cambia si se demora el proyecto?", "acceptedAnswer": {"@type": "Answer", "text": "No. El precio acordado en dólares no cambia."}}, {"@type": "Question", "name": "¿Cómo se paga?", "acceptedAnswer": {"@type": "Answer", "text": "Primero acordamos por escrito qué incluye, el precio y el plazo. Usted deposita el monto en Workana y queda retenido hasta que aprueba el trabajo. El precio no sube por la comisión."}}]}</script>
 </head>
 <body>
 <nav class="nav">
@@ -58,7 +58,7 @@
 <section class="sec">
   <div class="wrap">
     <h2>Preguntas frecuentes</h2>
-    <details class="faq"><summary>¿Me sirve Tiendanube o conviene una página aparte?</summary><p>Si vende productos, Tiendanube suele ser lo más práctico. Si ofrece servicios, una página con botón de WhatsApp alcanza. Cuénteme qué vende y le digo qué conviene.</p></details><details class="faq"><summary>¿El precio cambia si se demora el proyecto?</summary><p>No. El precio acordado en dólares no cambia.</p></details><details class="faq"><summary>¿Cómo se paga?</summary><p>Acordamos el alcance por escrito, usted paga y empiezo.</p></details>
+    <details class="faq"><summary>¿Me sirve Tiendanube o conviene una página aparte?</summary><p>Si vende productos, Tiendanube suele ser lo más práctico. Si ofrece servicios, una página con botón de WhatsApp alcanza. Cuénteme qué vende y le digo qué conviene.</p></details><details class="faq"><summary>¿El precio cambia si se demora el proyecto?</summary><p>No. El precio acordado en dólares no cambia.</p></details><details class="faq"><summary>¿Cómo se paga?</summary><p>Primero acordamos por escrito qué incluye, el precio y el plazo. Usted deposita el monto en Workana y queda retenido hasta que aprueba el trabajo. El precio no sube por la comisión.</p></details>
     <h2>También le puede servir</h2>
     <ul class="facts"><li><a href="automatizar-excel-con-ia.html">Automatizar Excel con IA para su negocio</a></li><li><a href="cuanto-cuesta-pagina-web-chile.html">Cuánto cuesta una página web en Chile para una pyme</a></li><li><a href="cuanto-cuesta-pagina-web-colombia.html">Cuánto cuesta una página web en Colombia (2026)</a></li></ul>
   </div>
@@ -75,14 +75,15 @@
         <textarea id="necesita" name="necesita" rows="4" required></textarea>
         <label for="correo">Su correo</label>
         <input id="correo" name="correo" type="email" required autocomplete="email">
-        <button class="btn btn--wide" type="submit">Enviar por correo</button>
-        <p class="form__hint">Se abrirá su aplicación de correo con el mensaje preparado. Solo pulse «Enviar».</p>
+        <button class="btn btn--wide" type="submit" id="enviar">Enviar</button>
+        <p class="form__hint">Le respondo en minutos a su correo.</p>
+        <p id="form-ok" class="form__ok" hidden>Recibido. Le respondo en minutos a su correo.</p>
       </form>
     </div>
     <aside class="contact__side card">
       <h3>¿Prefiere escribir directo?</h3>
       <p class="email"><a href="mailto:ivanovkonstantin949@gmail.com?subject=%5BES%20web%5D%20AR%20">ivanovkonstantin949@gmail.com</a></p>
-      <p class="muted">Respondo en español. Pago antes de empezar, con el alcance acordado por escrito.</p>
+      <p class="muted">Respondo en español. Precio y alcance por escrito; su pago queda protegido en Workana hasta que aprueba el trabajo.</p>
     </aside>
   </div>
 </section>
@@ -99,7 +100,16 @@
     var body = 'Nombre: ' + v('nombre') + '\nPaís: Argentina (AR)\nPágina: ' + location.pathname + '\nNecesito: ' + nec + '\nMi correo: ' + v('correo');
     return 'mailto:ivanovkonstantin949@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
   };
-  f.addEventListener('submit', function (e) { e.preventDefault(); window.location.href = window.esMailto(); });
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var b = document.getElementById('enviar'); b.disabled = true; b.textContent = 'Enviando…';
+    var data = {_subject: '[ES web] AR ' + v('necesita').replace(/\s+/g, ' ').slice(0, 40), _template: 'table', _captcha: 'false',
+                nombre: v('nombre'), necesito: v('necesita'), correo: v('correo'), pagina: location.pathname, _replyto: v('correo')};
+    fetch('https://formsubmit.co/ajax/ivanovkonstantin949@gmail.com', {method: 'POST', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}, body: JSON.stringify(data)})
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (String(j.success) === 'true') { document.getElementById('form-ok').hidden = false; f.reset(); b.textContent = 'Enviado ✓'; } else { window.location.href = window.esMailto(); } })
+      .catch(function () { window.location.href = window.esMailto(); });
+  });
 })();
 </script>
 </body>
