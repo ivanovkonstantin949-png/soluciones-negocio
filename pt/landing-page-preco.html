@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Landing page: preço médio e o que entra</title>
+<meta name="description" content="Landing page para pequeno negócio a partir de R$ 450, primeira versão em 2 a 3 dias. Veja o que está incluído e o que muda o preço.">
+<meta name="theme-color" content="#0f766e">
+<link rel="canonical" href="https://ivanovkonstantin949-png.github.io/soluciones-negocio/pt/landing-page-preco.html">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Landing page serve para anúncio no Instagram?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. A página recebe o tráfego do anúncio e leva direto para o seu WhatsApp."}}, {"@type": "Question", "name": "Qual a diferença para um site?", "acceptedAnswer": {"@type": "Answer", "text": "A landing page tem um único objetivo e uma única página. O site apresenta a empresa inteira em várias páginas."}}]}</script>
+</head>
+<body>
+<nav class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="./">GRUSTINA AI</a>
+    <div class="nav__links">
+      <a href="./#servicos">Serviços</a>
+      <a href="../">Español</a>
+      <a class="btn btn--small" href="#contato">Escrever</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero hero--plain">
+  <div class="wrap hero__inner">
+    <div class="hero__text">
+      <h1>Landing page: qual é o preço e o que está incluído</h1>
+      <p class="hero__intro">Uma landing page feita para vender um produto ou serviço custa a partir de R$ 450. O objetivo é um só: levar o visitante a falar com você no WhatsApp ou deixar o contato.</p>
+      <p class="hero__note">A partir de <b>R$ 450</b> · preço de lançamento para os primeiros clientes</p>
+      <div class="hero__cta"><a class="btn" href="#contato">Pedir preço exato</a></div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="sec">
+  <div class="wrap">
+    <h2>O que está incluído</h2>
+    <ul class="facts"><li>Título e oferta claros no topo</li><li>Benefícios, prova e perguntas frequentes</li><li>Botão de WhatsApp em toda a página</li><li>Formulário que chega no seu e-mail</li><li>Versão para celular</li></ul>
+    <h2>Prazo</h2>
+    <p>Primeira versão em 2 a 3 dias, com uma rodada de ajustes incluída.</p>
+    <h2>Do que depende o preço</h2>
+    <ul class="facts"><li>Textos prontos ou escritos por mim</li><li>Quantidade de blocos</li><li>Integração com anúncios e pixel</li><li>Domínio próprio</li></ul>
+  </div>
+</section>
+
+<section class="sec sec--alt">
+  <div class="wrap">
+    <h2>Um caso real</h2>
+    <article class="card case" data-id="ses-site-and-blog"><span class="tag">Empresa de serviços</span><h3>Site com blog e painel para editar os textos</h3><ul class="facts"><li>O trabalho foi aceito e pago por completo.</li><li>Depois da entrega o cliente pediu uma melhoria, também entregue.</li><li>As mudanças feitas no painel aparecem em todas as seções do site.</li></ul></article>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <h2>Perguntas frequentes</h2>
+    <details class="faq"><summary>Landing page serve para anúncio no Instagram?</summary><p>Sim. A página recebe o tráfego do anúncio e leva direto para o seu WhatsApp.</p></details><details class="faq"><summary>Qual a diferença para um site?</summary><p>A landing page tem um único objetivo e uma única página. O site apresenta a empresa inteira em várias páginas.</p></details>
+    <h2>Também pode ajudar</h2>
+    <ul class="facts"><li><a href="quanto-custa-um-site.html">Quanto custa um site simples em 2026</a></li><li><a href="automatizar-planilha-excel.html">Automatizar planilha Excel do seu negócio</a></li></ul>
+  </div>
+</section>
+<section id="contato" class="sec sec--alt">
+  <div class="wrap contact">
+    <div class="contact__form card">
+      <h2>Conte o que você precisa</h2>
+      <form id="pedido" autocomplete="on">
+        <label for="nome">Nome</label>
+        <input id="nome" name="nome" type="text" required autocomplete="name">
+        <label for="precisa">O que você precisa?</label>
+        <textarea id="precisa" name="precisa" rows="4" required></textarea>
+        <label for="email">Seu e-mail</label>
+        <input id="email" name="email" type="email" required autocomplete="email">
+        <button class="btn btn--wide" type="submit">Enviar por e-mail</button>
+        <p class="form__hint">Vai abrir o seu aplicativo de e-mail com a mensagem pronta. É só tocar em «Enviar».</p>
+      </form>
+    </div>
+    <aside class="contact__side card">
+      <h3>Prefere escrever direto?</h3>
+      <p class="email"><a href="mailto:ivanovkonstantin949@gmail.com?subject=%5BES%20web%5D%20BR%20">ivanovkonstantin949@gmail.com</a></p>
+      <p class="muted">Respondo em português. Preço e escopo combinados por escrito antes de começar.</p>
+    </aside>
+  </div>
+</section>
+</main>
+
+<footer class="foot"><div class="wrap"><p>Mikhail Ivanov · estúdio GRUSTINA AI · Uzbequistão, atendimento online</p></div></footer>
+<script>
+(function () {
+  var f = document.getElementById('pedido');
+  function v(id) { return document.getElementById(id).value.trim(); }
+  window.esMailto = function () {
+    var nec = v('precisa');
+    var subject = '[ES web] BR ' + nec.replace(/\s+/g, ' ').slice(0, 40);
+    var body = 'Nome: ' + v('nome') + '\nPaís: Brasil (BR)\nPágina: ' + location.pathname + '\nPreciso: ' + nec + '\nMeu e-mail: ' + v('email');
+    return 'mailto:ivanovkonstantin949@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  };
+  f.addEventListener('submit', function (e) { e.preventDefault(); window.location.href = window.esMailto(); });
+})();
+</script>
+</body>
+</html>
