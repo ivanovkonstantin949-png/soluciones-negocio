@@ -60,7 +60,7 @@
     <h2>Preguntas frecuentes</h2>
     <details class="faq"><summary>¿Sirve para anuncios de Facebook?</summary><p>Sí. Se puede agregar el código de seguimiento para que el anuncio mida cuántas personas le escribieron.</p></details><details class="faq"><summary>¿El precio es en pesos o en dólares?</summary><p>Se lo indico en ambas monedas, siempre escribiendo USD o MXN para que no haya confusión con el signo.</p></details><details class="faq"><summary>¿Cómo se paga?</summary><p>Primero acordamos por escrito qué incluye, el precio y el plazo. Usted deposita el monto en Workana y queda retenido hasta que aprueba el trabajo. El precio no sube por la comisión.</p></details>
     <h2>También le puede servir</h2>
-    <ul class="facts"><li><a href="cuanto-cuesta-bot-whatsapp-mexico.html">Cuánto cuesta un bot de WhatsApp en México</a></li><li><a href="bot-whatsapp-para-restaurantes.html">Bot de WhatsApp para restaurantes: pedidos y menú</a></li><li><a href="cuanto-cuesta-pagina-web-colombia.html">Cuánto cuesta una página web en Colombia (2026)</a></li></ul>
+    <ul class="facts"><li><a href="cuanto-cuesta-bot-whatsapp-mexico.html">Cuánto cuesta un bot de WhatsApp en México</a></li><li><a href="bot-whatsapp-para-restaurantes.html">Bot de WhatsApp para restaurantes: menú y pedidos</a></li><li><a href="cuanto-cuesta-pagina-web-colombia.html">Cuánto cuesta una página web en Colombia (2026)</a></li></ul>
   </div>
 </section>
 
@@ -92,19 +92,30 @@
 <footer class="foot"><div class="wrap"><p>Mikhail Ivanov · estudio GRUSTINA AI</p></div></footer>
 <script>
 (function () {
+  var q = new URLSearchParams(location.search);
+  ['gclid', 'utm_campaign', 'utm_content'].forEach(function (k) {
+    var v = q.get(k); if (v) { try { sessionStorage.setItem('ad_' + k, v); } catch (e) {} }
+  });
+  window.adParam = function (k) { try { return sessionStorage.getItem('ad_' + k) || ''; } catch (e) { return ''; } };
+  window.adTid = function (s) { var h = 5381; for (var i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) >>> 0; } return 'f' + h.toString(16); };
+})();
+</script>
+<script>
+(function () {
   var f = document.getElementById('pedido');
+  var cc = (function () { var u = (window.adParam ? adParam('utm_campaign') : '').trim().toUpperCase(); return u.length === 2 && '|MX|CO|CL|AR|PE|EC|UY|VE|BO|PY|CR|PA|DO|GT|SV|HN|NI|BR|'.indexOf('|' + u + '|') >= 0 ? u : 'MX'; })();
   function v(id) { return document.getElementById(id).value.trim(); }
   window.esMailto = function () {
     var nec = v('necesita');
-    var subject = '[ES web] MX ' + nec.replace(/\s+/g, ' ').slice(0, 40);
-    var body = 'Nombre: ' + v('nombre') + '\nPaís: México (MX)\nPágina: ' + location.pathname + '\nNecesito: ' + nec + '\nMi correo: ' + v('correo');
+    var subject = '[ES web] ' + cc + ' ' + nec.replace(/\s+/g, ' ').slice(0, 40);
+    var body = 'Nombre: ' + v('nombre') + '\nPaís: ' + cc + ' (página MX)\nPágina: ' + location.pathname + '\nNecesito: ' + nec + '\nMi correo: ' + v('correo');
     return 'mailto:ivanovkonstantin949@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
   };
   f.addEventListener('submit', function (e) {
     e.preventDefault();
     var b = document.getElementById('enviar'); b.disabled = true; b.textContent = 'Enviando…';
-    var data = {_subject: '[ES web] MX ' + v('necesita').replace(/\s+/g, ' ').slice(0, 40), _template: 'table', _captcha: 'false',
-                nombre: v('nombre'), necesito: v('necesita'), correo: v('correo'), pagina: location.pathname, _replyto: v('correo')};
+    var data = {_subject: '[ES web] ' + cc + ' ' + v('necesita').replace(/\s+/g, ' ').slice(0, 40), _template: 'table', _captcha: 'false',
+                nombre: v('nombre'), necesito: v('necesita'), correo: v('correo'), pagina: location.pathname, _replyto: v('correo'), anuncio: (window.adParam && adParam('utm_campaign')) ? adParam('utm_campaign') + '/' + adParam('utm_content') : '', gclid: window.adParam ? adParam('gclid') : '',};
     fetch('https://formsubmit.co/ajax/ivanovkonstantin949@gmail.com', {method: 'POST', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}, body: JSON.stringify(data)})
       .then(function (r) { return r.json(); })
       .then(function (j) { if (String(j.success) === 'true') { document.getElementById('form-ok').hidden = false; f.reset(); b.textContent = 'Enviado ✓'; } else { window.location.href = window.esMailto(); } })

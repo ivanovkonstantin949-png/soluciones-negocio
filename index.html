@@ -209,11 +209,21 @@
 <footer class="foot">
   <div class="wrap">
     <p>Mikhail Ivanov · estudio GRUSTINA AI</p>
-    <p class="muted"><a href="cuanto-cuesta-pagina-web-colombia.html">Cuánto cuesta una página web en Colombia (2026)</a> · <a href="cuanto-cuesta-pagina-web-argentina.html">Cuánto cuesta una página web en Argentina en 2026</a> · <a href="cuanto-cuesta-pagina-web-peru.html">Cuánto cuesta una página web en Perú para un negocio</a> · <a href="cuanto-cuesta-pagina-web-chile.html">Cuánto cuesta una página web en Chile para una pyme</a> · <a href="landing-page-precio-mexico.html">Landing page: precio en México en 2026</a> · <a href="cuanto-cuesta-bot-whatsapp-mexico.html">Cuánto cuesta un bot de WhatsApp en México</a> · <a href="cuanto-cuesta-chatbot-colombia.html">Cuánto cuesta un chatbot en Colombia (WhatsApp)</a> · <a href="bot-whatsapp-para-restaurantes.html">Bot de WhatsApp para restaurantes: pedidos y menú</a> · <a href="bot-whatsapp-para-agendar-citas.html">Bot de WhatsApp para agendar citas</a> · <a href="automatizar-excel-con-ia.html">Automatizar Excel con IA para su negocio</a> · <a href="cuanto-cuesta-pagina-web-ecuador.html">Cuánto cuesta una página web en Ecuador (2026)</a> · <a href="cuanto-cuesta-pagina-web-uruguay.html">Cuánto cuesta una página web en Uruguay (2026)</a> · <a href="cuanto-cuesta-pagina-web-venezuela.html">Cuánto cuesta una página web en Venezuela (2026)</a> · <a href="cuanto-cuesta-pagina-web-costa-rica.html">Cuánto cuesta una página web en Costa Rica (2026)</a> · <a href="cuanto-cuesta-pagina-web-panama.html">Cuánto cuesta una página web en Panamá (2026)</a> · <a href="cuanto-cuesta-pagina-web-republica-dominicana.html">Cuánto cuesta una página web en República Dominicana (2026)</a> · <a href="cuanto-cuesta-pagina-web-guatemala.html">Cuánto cuesta una página web en Guatemala (2026)</a> · <a href="cuanto-cuesta-pagina-web-bolivia.html">Cuánto cuesta una página web en Bolivia (2026)</a></p>
+    <p class="muted"><a href="cuanto-cuesta-pagina-web-colombia.html">Cuánto cuesta una página web en Colombia (2026)</a> · <a href="cuanto-cuesta-pagina-web-argentina.html">Cuánto cuesta una página web en Argentina en 2026</a> · <a href="cuanto-cuesta-pagina-web-peru.html">Cuánto cuesta una página web en Perú para un negocio</a> · <a href="cuanto-cuesta-pagina-web-chile.html">Cuánto cuesta una página web en Chile para una pyme</a> · <a href="landing-page-precio-mexico.html">Landing page: precio en México en 2026</a> · <a href="cuanto-cuesta-bot-whatsapp-mexico.html">Cuánto cuesta un bot de WhatsApp en México</a> · <a href="cuanto-cuesta-chatbot-colombia.html">Cuánto cuesta un chatbot en Colombia (WhatsApp)</a> · <a href="bot-whatsapp-para-restaurantes.html">Bot de WhatsApp para restaurantes: menú y pedidos</a> · <a href="bot-whatsapp-para-agendar-citas.html">Bot de WhatsApp para agendar citas</a> · <a href="automatizar-excel-con-ia.html">Automatizar Excel con IA para su negocio</a> · <a href="cuanto-cuesta-pagina-web-ecuador.html">Cuánto cuesta una página web en Ecuador (2026)</a> · <a href="cuanto-cuesta-pagina-web-uruguay.html">Cuánto cuesta una página web en Uruguay (2026)</a> · <a href="cuanto-cuesta-pagina-web-venezuela.html">Cuánto cuesta una página web en Venezuela (2026)</a> · <a href="cuanto-cuesta-pagina-web-costa-rica.html">Cuánto cuesta una página web en Costa Rica (2026)</a> · <a href="cuanto-cuesta-pagina-web-panama.html">Cuánto cuesta una página web en Panamá (2026)</a> · <a href="cuanto-cuesta-pagina-web-republica-dominicana.html">Cuánto cuesta una página web en República Dominicana (2026)</a> · <a href="cuanto-cuesta-pagina-web-guatemala.html">Cuánto cuesta una página web en Guatemala (2026)</a> · <a href="cuanto-cuesta-pagina-web-bolivia.html">Cuánto cuesta una página web en Bolivia (2026)</a> · <a href="cuanto-cuesta-bot-whatsapp-chile.html">Cuánto cuesta un bot de WhatsApp en Chile</a></p>
     <p class="muted"><a href="pt/">Português</a> · <a href="privacidad/">Política de privacidad</a></p>
   </div>
 </footer>
 
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  ['gclid', 'utm_campaign', 'utm_content'].forEach(function (k) {
+    var v = q.get(k); if (v) { try { sessionStorage.setItem('ad_' + k, v); } catch (e) {} }
+  });
+  window.adParam = function (k) { try { return sessionStorage.getItem('ad_' + k) || ''; } catch (e) { return ''; } };
+  window.adTid = function (s) { var h = 5381; for (var i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) >>> 0; } return 'f' + h.toString(16); };
+})();
+</script>
 <script>
 (function () {
   var EMAIL = "ivanovkonstantin949@gmail.com";
@@ -221,6 +231,8 @@
   var f = document.getElementById('pedido');
   function val(id) { return document.getElementById(id).value.trim(); }
   function paisNombre() { var s = document.getElementById('pais'); return s.options[s.selectedIndex].text; }
+  (function () { var u = (function () { var u = (window.adParam ? adParam('utm_campaign') : '').trim().toUpperCase(); return u.length === 2 && '|MX|CO|CL|AR|PE|EC|UY|VE|BO|PY|CR|PA|DO|GT|SV|HN|NI|BR|'.indexOf('|' + u + '|') >= 0 ? u : ''; })(); var s = document.getElementById('pais');
+    if (u && [].some.call(s.options, function (o) { return o.value === u; })) { s.value = u; } })();
   function buildMailto() {
     var pais = val('pais');
     var nec = val('necesita');
@@ -244,7 +256,7 @@
     var pais = val('pais');
     var data = {_subject: PREFIX + ' ' + pais + ' ' + val('necesita').replace(/\s+/g, ' ').slice(0, 40), _template: 'table',
                 _captcha: 'false', nombre: val('nombre'), pais: paisNombre() + ' (' + pais + ')', necesito: val('necesita'),
-                correo: val('correo'), pagina: location.pathname, _replyto: val('correo')};
+                correo: val('correo'), pagina: location.pathname, _replyto: val('correo'), anuncio: (window.adParam && adParam('utm_campaign')) ? adParam('utm_campaign') + '/' + adParam('utm_content') : '', gclid: window.adParam ? adParam('gclid') : '',};
     fetch('https://formsubmit.co/ajax/' + EMAIL, {method: 'POST', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}, body: JSON.stringify(data)})
       .then(function (r) { return r.json(); })
       .then(function (j) { if (String(j.success) === 'true') { document.getElementById('form-ok').hidden = false; f.reset(); b.textContent = 'Enviado ✓'; } else { viaMail(); } })

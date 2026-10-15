@@ -87,6 +87,16 @@
 <footer class="foot"><div class="wrap"><p>Mikhail Ivanov, de Dubai (EAU) · Faturamento: GRUSTINA AI, registrada em Tashkent, Uzbequistão · atendimento online</p></div></footer>
 <script>
 (function () {
+  var q = new URLSearchParams(location.search);
+  ['gclid', 'utm_campaign', 'utm_content'].forEach(function (k) {
+    var v = q.get(k); if (v) { try { sessionStorage.setItem('ad_' + k, v); } catch (e) {} }
+  });
+  window.adParam = function (k) { try { return sessionStorage.getItem('ad_' + k) || ''; } catch (e) { return ''; } };
+  window.adTid = function (s) { var h = 5381; for (var i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) >>> 0; } return 'f' + h.toString(16); };
+})();
+</script>
+<script>
+(function () {
   var f = document.getElementById('pedido');
   function v(id) { return document.getElementById(id).value.trim(); }
   window.esMailto = function () {
@@ -99,7 +109,7 @@
     e.preventDefault();
     var b = document.getElementById('enviar'); b.disabled = true; b.textContent = 'Enviando…';
     var data = {_subject: '[ES web] BR ' + v('precisa').replace(/\s+/g, ' ').slice(0, 40), _template: 'table', _captcha: 'false',
-                nome: v('nome'), preciso: v('precisa'), email: v('email'), pagina: location.pathname, _replyto: v('email')};
+                nome: v('nome'), preciso: v('precisa'), email: v('email'), pagina: location.pathname, _replyto: v('email'), anuncio: (window.adParam && adParam('utm_campaign')) ? adParam('utm_campaign') + '/' + adParam('utm_content') : '', gclid: window.adParam ? adParam('gclid') : '',};
     fetch('https://formsubmit.co/ajax/ivanovkonstantin949@gmail.com', {method: 'POST', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}, body: JSON.stringify(data)})
       .then(function (r) { return r.json(); })
       .then(function (j) { if (String(j.success) === 'true') { document.getElementById('form-ok').hidden = false; f.reset(); b.textContent = 'Enviado ✓'; } else { window.location.href = window.esMailto(); } })
