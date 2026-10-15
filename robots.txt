@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ivanovkonstantin949-png.github.io/soluciones-negocio/sitemap.xml
