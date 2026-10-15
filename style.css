@@ -595,3 +595,38 @@ section[id] {
 }
 .email a { color: inherit; text-decoration: none; }
 .email a:hover { text-decoration: underline; }
+
+/* pt articles (artigo, 15.10): readable width, table scrolls on phones */
+.artigo {
+  max-width: 760px;
+}
+.artigo p {
+  line-height: 1.65;
+  margin: 0 0 1em;
+}
+.artigo h2 {
+  margin-top: 1.6em;
+}
+.artigo ol.facts {
+  padding-left: 1.2em;
+}
+.tbl {
+  overflow-x: auto;
+  margin: 1em 0 1.4em;
+}
+.tbl table {
+  border-collapse: collapse;
+  min-width: 560px;
+  width: 100%;
+  background: var(--card);
+}
+.tbl th,
+.tbl td {
+  border: 1px solid var(--line);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+.tbl th {
+  background: var(--accent-soft);
+}
